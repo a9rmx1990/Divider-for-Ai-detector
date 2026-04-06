@@ -19,7 +19,10 @@ import os
 import numpy as np
 import cv2
 import time
-from image_divider import ImageDivider
+
+# Ensure we can import from the src/ module easily
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from src.image_divider import ImageDivider
 
 
 # ---------------------------------------------------------------------------
@@ -135,7 +138,8 @@ def test_real_image(image_path: str):
     ]
 
     # Output directory for sample patches
-    out_dir = os.path.join(os.path.dirname(image_path) or ".", "divider_output")
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    out_dir = os.path.join(project_root, "divider_output")
     os.makedirs(out_dir, exist_ok=True)
 
     for cfg in configs:
